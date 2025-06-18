@@ -2,7 +2,7 @@ import re
 
 txt = input()
 x = re.search('a.{1}b', txt)
-y = re.search('a.{2}b', txt)
+y = re.search('a.{2}b{2, 3}', txt)
 if re.search('a.{1}b', txt):
     print(x)
 elif re.search('a.{2}b', txt):
