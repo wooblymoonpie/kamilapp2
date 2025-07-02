@@ -2,10 +2,10 @@ import pygame
 import sys
 import random
 
-# Initialize Pygame
+
 pygame.init()
 
-# Set up game window
+
 width, height = 500, 500         # Window size
 cell_size = 10                   # Size of each square (snake block and food)
 screen = pygame.display.set_mode((width, height))

@@ -8,7 +8,7 @@ pygame.mixer.init()
 
 WIDTH, HEIGHT = 600,800  
 im = pygame.display.set_mode((WIDTH, HEIGHT))  
-pygame.display.set_caption("pl")
+pygame.display.set_caption("plaaaaaaaaaaaaaaaaaay")
 background = pygame.image.load("background.jpg")
 background = pygame.transform.scale(background,(WIDTH,HEIGHT))
 

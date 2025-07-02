@@ -6,7 +6,7 @@ pygame.init()
 
 WIDTH, HEIGHT = 800, 600  
 Display = pygame.display.set_mode((WIDTH, HEIGHT))  
-pygame.display.set_caption("Мики")  
+pygame.display.set_caption("MOUSE")  
 
 background = pygame.image.load("clock.png")  
 sec_line = pygame.image.load("leftarm.png")
