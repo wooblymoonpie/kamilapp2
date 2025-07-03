@@ -1,0 +1,68 @@
+PHONEBOOK:
+
+1.  Начало: подключение к базе:
+
+import psycopg2
+
+conn = psycopg2.connect(
+    host="localhost",
+    dbname="lab10",
+    user="postgres",
+    password="твой_пароль",
+    port=5432,
+    client_encoding="UTF8"
+)
+
+cur = conn.cursor()
+
+#"Я подключаюсь к базе PostgreSQL с помощью библиотеки psycopg2. Создаю соединение и курсор для отправки SQL-запросов."
+
+2. Создание таблицы:
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS phonebook (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL, 
+    phone VARCHAR(255) NOT NULL
+)
+""")
+
+#"Создаю таблицу phonebook, если она ещё не существует. В ней 4 поля: ID, имя, фамилия и номер телефона."
+
+3.  Ввод данных вручную или из файла:
+
+# Через CSV
+with open(filepath, 'r') as f:
+    reader = csv.reader(f)
+    for row in reader:
+        cur.execute("INSERT INTO phonebook (name, surname, phone) VALUES (%s, %s, %s)", (row[0], row[1], row[2]))
+
+# Вручную
+name = input("Name:")
+surname = input("Surname:")
+phone = input("Phone:")
+cur.execute("INSERT INTO phonebook (name, surname, phone) VALUES (%s, %s, %s)", (name, surname, phone))
+
+#"Добавлять контакты можно вручную или из файла. При вводе с клавиатуры пользователь сам пишет имя, фамилию и телефон. 
+При вводе из CSV-файла программа считывает и загружает все строки.
+
+4. Обновление данных:
+
+cur.execute("UPDATE phonebook SET name = %s WHERE name = %s", (new_name, old_name))
+
+#"Можно изменить имя, фамилию или номер. Например, если человек поменял номер, то он вводит старый и новый, и программа заменяет его в таблице."
+
+5.  Поиск и фильтрация:
+
+cur.execute("SELECT * FROM phonebook WHERE name = %s", (name,))
+
+#"Можно найти контакт по имени, фамилии, телефону или ID. Программа делает SQL-запрос и выводит результат."
+
+6. Удаление и просмотр таблицы:
+
+cur.execute("DELETE FROM phonebook WHERE phone = %s", (phone,))
+cur.execute("SELECT * FROM phonebook")
+
+#"Контакт можно удалить по номеру. Также есть функция, которая выводит все записи."
+
